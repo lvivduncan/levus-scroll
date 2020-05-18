@@ -8,10 +8,13 @@
 
 :root {
   --gray: #656d78;
+  --light: rgb(255 255 255 / 70%);
+  --white: rgb(255 255 255 / 100%);
 }
 
 body {
   padding: 100px 0;
+  font-family: sans-serif;
 }
 
 #example {
@@ -19,6 +22,12 @@ body {
   min-height: 300px;
   margin: auto;
   background: var(--gray);
+}
+
+@media(max-width: 640px){
+  #example{
+    width: 100%;
+  }
 }
 
 /* wpapper */
@@ -58,12 +67,10 @@ body {
 }
 
 /* elements */
-.levus-scroll .scroll-item {
-  width: 200px;
+.scroll-item {
+  width: 33.3333%;
   height: 240px;
   padding: 0 10px;
-  /* overflow: hidden; */
-
   background: var(--gray);
 
   position: absolute;
@@ -76,6 +83,29 @@ body {
   transition: all .5s;
 }
 
-.levus-scroll .scroll-item img{
+@media(max-width: 991px){
+  .scroll-item{
+    width: 50%;
+  }
+}
+
+@media(max-width: 776px){
+  .scroll-item{
+    width: 100%;
+  }
+}
+
+.scroll-item img{
   max-width: 100%;
+}
+
+.scroll-item a{
+  color: var(--light);
+  font-size: 14px;
+  display: block;
+  margin: 10px 0 0;
+}
+
+.scroll-item a:hover{
+  color: var(--white);
 }
