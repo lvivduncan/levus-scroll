@@ -19,7 +19,7 @@
 
   // one item size
   let width = 200;
-
+/* 
   // resize
   document.addEventListener('resize', () => {
     if (viewport > 1200) {
@@ -35,7 +35,7 @@
       console.log(width)
     }
   });
-
+ */
   // sizes
   const sizes = [];
 
