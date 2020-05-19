@@ -15,7 +15,7 @@
   items = scroll.querySelectorAll('.scroll-item');
 
   // one item size
-  let width = 200;
+  let width = 1;
 
   // resize
   window.addEventListener('resize', move);
@@ -23,11 +23,8 @@
   // sizes
   const sizes = [];
 
-  // z-index
-  let zIdex = 0;
-
   // z-index position
-  let num = 0;
+  let zIdex = 0;
 
   // fill sizes
   items.forEach((item, i) => sizes.push(i * width - width));
@@ -58,29 +55,58 @@
   // function move 1 item
   function move() {
 
-    if (scroll.offsetWidth >= 600) {
-      width = scroll.offsetWidth / 3;
-      items.forEach(item => item.style.width = `${scroll.offsetWidth / 3}px`);
-    }
-    if (scroll.offsetWidth < 600) {
-      width = scroll.offsetWidth / 2;
-      items.forEach(item => item.style.width = `${scroll.offsetWidth / 2}px`);
-    }
     if (scroll.offsetWidth < 400) {
-      items.forEach(item => item.style.width = `${scroll.offsetWidth}px`);
+      width = scroll.offsetWidth;
+      items.forEach((item, i) => {
+        item.style.width = `${scroll.offsetWidth}px`;
+
+        item.style.transform = `translateX(${sizes[i] * width}px)`;
+
+        // 2
+        if (sizes[i] === width) zIdex = 3;
+        // 1, 3
+        else if (sizes[i] === 0 || sizes[i] === width * 2) zIdex = 2;
+        // other
+        else zIdex = 0;
+
+        item.style.zIndex = zIdex;
+      });
     }
 
-    items.forEach((item, i) => {
-      item.style.transform = `translateX(${sizes[i]}px)`;
+    else if (scroll.offsetWidth < 600) {
+      width = scroll.offsetWidth / 2;
+      items.forEach((item, i) => {
+        item.style.width = `${scroll.offsetWidth / 2}px`;
 
-      // 2
-      if (sizes[i] === width) num = 3;
-      // 1, 3
-      else if (sizes[i] === 0 || sizes[i] === width * 2) num = 2;
-      // other
-      else num = 0;
+        item.style.transform = `translateX(${sizes[i] * width}px)`;
 
-      item.style.zIndex = num;
-    });
+        // 2
+        if (sizes[i] === width) zIdex = 3;
+        // 1, 3
+        else if (sizes[i] === 0 || sizes[i] === width * 2) zIdex = 2;
+        // other
+        else zIdex = 0;
+
+        item.style.zIndex = zIdex;
+      });
+    }
+
+    else if (scroll.offsetWidth > 599) {
+      width = scroll.offsetWidth / 3;
+      items.forEach((item, i) => {
+        item.style.width = `${scroll.offsetWidth / 3}px`;
+
+        item.style.transform = `translateX(${sizes[i] * width}px)`;
+
+        // 2
+        if (sizes[i] === width) zIdex = 3;
+        // 1, 3
+        else if (sizes[i] === 0 || sizes[i] === width * 2) zIdex = 2;
+        // other
+        else zIdex = 0;
+
+        item.style.zIndex = zIdex;
+      });
+    }
   }
 }
