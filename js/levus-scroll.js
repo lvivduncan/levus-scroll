@@ -58,15 +58,11 @@
     if (scroll.offsetWidth < 400) {
       width = scroll.offsetWidth;
       items.forEach((item, i) => {
-        item.style.width = `${scroll.offsetWidth}px`;
+        item.style.width = `${width}px`;
 
         item.style.transform = `translateX(${sizes[i] * width}px)`;
 
-        // 2
-        if (sizes[i] === width) zIdex = 3;
-        // 1, 3
-        else if (sizes[i] === 0 || sizes[i] === width * 2) zIdex = 2;
-        // other
+        if (sizes[i] === 1) zIdex = 3;
         else zIdex = 0;
 
         item.style.zIndex = zIdex;
@@ -76,15 +72,11 @@
     else if (scroll.offsetWidth < 600) {
       width = scroll.offsetWidth / 2;
       items.forEach((item, i) => {
-        item.style.width = `${scroll.offsetWidth / 2}px`;
+        item.style.width = `${width}px`;
 
         item.style.transform = `translateX(${sizes[i] * width}px)`;
 
-        // 2
-        if (sizes[i] === width) zIdex = 3;
-        // 1, 3
-        else if (sizes[i] === 0 || sizes[i] === width * 2) zIdex = 2;
-        // other
+        if (sizes[i] === 0 || sizes[i] === 1 || sizes[i] === 2) zIdex = 3;
         else zIdex = 0;
 
         item.style.zIndex = zIdex;
@@ -94,19 +86,18 @@
     else if (scroll.offsetWidth > 599) {
       width = scroll.offsetWidth / 3;
       items.forEach((item, i) => {
-        item.style.width = `${scroll.offsetWidth / 3}px`;
+        item.style.width = `${width}px`;
 
         item.style.transform = `translateX(${sizes[i] * width}px)`;
 
-        // 2
-        if (sizes[i] === width) zIdex = 3;
-        // 1, 3
-        else if (sizes[i] === 0 || sizes[i] === width * 2) zIdex = 2;
-        // other
+        if (sizes[i] === 1) zIdex = 3;
+        else if (sizes[i] ===  0 || sizes[i] === 2) zIdex = 2;
         else zIdex = 0;
 
         item.style.zIndex = zIdex;
       });
     }
+
+    console.log(sizes)
   }
 }

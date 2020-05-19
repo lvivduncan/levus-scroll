@@ -68,8 +68,6 @@ body {
 
 /* elements */
 .scroll-item {
-  /* width: 33.3333%; */
-  height: 240px;
   padding: 0 10px;
   background: var(--gray);
 
@@ -82,18 +80,6 @@ body {
   -webkit-transition: all .5s;
   transition: all .5s;
 }
-
-/* @media(max-width: 991px){
-  .scroll-item{
-    width: 50%;
-  }
-}
-
-@media(max-width: 776px){
-  .scroll-item{
-    width: 100%;
-  }
-} */
 
 .scroll-item img{
   width: 100%!important;
