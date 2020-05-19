@@ -14,28 +14,12 @@
   // new (all) scroll elements
   items = scroll.querySelectorAll('.scroll-item');
 
-  // ширина вікна
-  const viewport = window.innerWidth;
-
   // one item size
   let width = 200;
-/* 
+
   // resize
-  document.addEventListener('resize', () => {
-    if (viewport > 1200) {
-      width = 200;
-      console.log(width)
-    }
-    if (viewport < 1200) {
-      width = 300;
-      console.log(width)
-    }
-    if (viewport < 776) {
-      width = 400;
-      console.log(width)
-    }
-  });
- */
+  window.addEventListener('resize', move);
+
   // sizes
   const sizes = [];
 
@@ -73,6 +57,19 @@
 
   // function move 1 item
   function move() {
+
+    if (scroll.offsetWidth >= 600) {
+      width = scroll.offsetWidth / 3;
+      items.forEach(item => item.style.width = `${scroll.offsetWidth / 3}px`);
+    }
+    if (scroll.offsetWidth < 600) {
+      width = scroll.offsetWidth / 2;
+      items.forEach(item => item.style.width = `${scroll.offsetWidth / 2}px`);
+    }
+    if (scroll.offsetWidth < 400) {
+      items.forEach(item => item.style.width = `${scroll.offsetWidth}px`);
+    }
+
     items.forEach((item, i) => {
       item.style.transform = `translateX(${sizes[i]}px)`;
 
