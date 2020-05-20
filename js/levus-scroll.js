@@ -26,7 +26,7 @@
     const sizes = [];
   
     // z-index position
-    let zIdex = 0;
+    let zIndex = 0;
   
     // fill sizes
     items.forEach((item, i) => sizes.push(i * width - width));
@@ -64,10 +64,11 @@
   
           item.style.transform = `translateX(${sizes[i] * width}px)`;
   
-          if (sizes[i] === 1) zIdex = 3;
-          else zIdex = 0;
+          if (sizes[i] === 0) zIndex = 3;
+          else if(sizes[i] === -1 || sizes[i] === 1) zIndex = 2;
+          else zIndex = 0;
   
-          item.style.zIndex = zIdex;
+          item.style.zIndex = zIndex;
         });
       }
   
@@ -78,10 +79,10 @@
   
           item.style.transform = `translateX(${sizes[i] * width}px)`;
   
-          if (sizes[i] === 0 || sizes[i] === 1 || sizes[i] === 2) zIdex = 3;
-          else zIdex = 0;
+          if (sizes[i] === 0 || sizes[i] === 1 || sizes[i] === 2) zIndex = 3;
+          else zIndex = 0;
   
-          item.style.zIndex = zIdex;
+          item.style.zIndex = zIndex;
         });
       }
   
@@ -92,11 +93,11 @@
   
           item.style.transform = `translateX(${sizes[i] * width}px)`;
   
-          if (sizes[i] === 1) zIdex = 3;
-          else if (sizes[i] ===  0 || sizes[i] === 2) zIdex = 2;
-          else zIdex = 0;
+          if (sizes[i] === 1) zIndex = 3;
+          else if (sizes[i] ===  0 || sizes[i] === 2) zIndex = 2;
+          else zIndex = 0;
   
-          item.style.zIndex = zIdex;
+          item.style.zIndex = zIndex;
         });
       }
     }
