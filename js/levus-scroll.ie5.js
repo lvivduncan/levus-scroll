@@ -12,10 +12,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var LevusScroll = function () {
   function LevusScroll(elements) {
     _classCallCheck(this, LevusScroll);
-
     this.elements = document.querySelector(elements);
-    this.items = this.elements.querySelectorAll('.scroll-item');
     this.wrapper = this.elements.querySelector('.levus-scroll');
+    this.items = this.elements.querySelectorAll('.scroll-item');
     this.left = this.elements.querySelector('.left');
     this.right = this.elements.querySelector('.right');
     this.sizes = [];
@@ -95,14 +94,14 @@ var LevusScroll = function () {
           item.style.zIndex = _this4.zIndex;
         });
       }
-
-      console.log('move()');
     }
   }, {
     key: "resize",
     value: function resize() {
       var that = this;
-      window.addEventListener('resize', that.move);
+      window.addEventListener('resize', function () {
+        that.move();
+      });
     }
   }, {
     key: "init",
