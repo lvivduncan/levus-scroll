@@ -2,10 +2,12 @@
 
 class LevusScroll {
   constructor(elements) {
-    // wrapper
+    // global wrapper
     this.elements = document.querySelector(elements);
     // elements
     this.items = this.elements.querySelectorAll('.scroll-item');
+    // wrapper
+    this.wrapper = this.elements.querySelector('.levus-scroll');
     // to left button 
     this.left = this.elements.querySelector('.left');
     // to right button
@@ -22,7 +24,7 @@ class LevusScroll {
     // change quantity
     this.items.forEach(item => {
       const clone = item.cloneNode(!0);
-      this.elements.append(clone);
+      this.wrapper.append(clone);
     });
 
     this.items = this.elements.querySelectorAll('.scroll-item');
@@ -48,8 +50,8 @@ class LevusScroll {
   }
 
   move(){
-    if (this.elements.offsetWidth < 400) {
-      this.width = this.elements.offsetWidth;
+    if (this.wrapper.offsetWidth < 400) {
+      this.width = this.wrapper.offsetWidth;
       this.items.forEach((item, i) => {
         item.style.width = `${this.width}px`;
 
@@ -63,8 +65,8 @@ class LevusScroll {
       });
     }
 
-    else if (this.elements.offsetWidth < 600) {
-      this.width = this.elements.offsetWidth / 2;
+    else if (this.wrapper.offsetWidth < 600) {
+      this.width = this.wrapper.offsetWidth / 2;
       this.items.forEach((item, i) => {
         item.style.width = `${this.width}px`;
 
@@ -77,8 +79,8 @@ class LevusScroll {
       });
     }
 
-    else if (this.elements.offsetWidth > 599) {
-      this.width = this.elements.offsetWidth / 3;
+    else if (this.wrapper.offsetWidth > 599) {
+      this.width = this.wrapper.offsetWidth / 3;
       this.items.forEach((item, i) => {
         item.style.width = `${this.width}px`;
 
@@ -91,10 +93,12 @@ class LevusScroll {
         item.style.zIndex = this.zIndex;
       });
     }
+    console.log('move()')
   }
   
   resize(){
-    window.addEventListener('resize', this.move);
+    const that = this;
+    window.addEventListener('resize', that.move);
   }
 
   init() {
@@ -107,4 +111,8 @@ class LevusScroll {
 
 }
 
+// test 1
 (new LevusScroll('.levus-scroll-wrapper')).init();
+
+// test 2
+(new LevusScroll('.levus-scroll-wrapper-2')).init();
