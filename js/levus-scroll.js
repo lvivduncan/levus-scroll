@@ -4,10 +4,10 @@ class LevusScroll {
   constructor(elements) {
     // global wrapper
     this.elements = document.querySelector(elements);
-    // elements
-    this.items = this.elements.querySelectorAll('.scroll-item');
     // wrapper
     this.wrapper = this.elements.querySelector('.levus-scroll');
+    // elements
+    this.items = this.elements.querySelectorAll('.scroll-item');
     // to left button 
     this.left = this.elements.querySelector('.left');
     // to right button
@@ -93,12 +93,13 @@ class LevusScroll {
         item.style.zIndex = this.zIndex;
       });
     }
-    console.log('move()')
   }
   
   resize(){
     const that = this;
-    window.addEventListener('resize', that.move);
+    window.addEventListener('resize', function(){
+      that.move();
+    });
   }
 
   init() {
@@ -112,7 +113,7 @@ class LevusScroll {
 }
 
 // test 1
-(new LevusScroll('.levus-scroll-wrapper')).init();
+new LevusScroll('.levus-scroll-wrapper').init();
 
 // test 2
-(new LevusScroll('.levus-scroll-wrapper-2')).init();
+new LevusScroll('.levus-scroll-wrapper-2').init();
