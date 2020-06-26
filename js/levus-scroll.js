@@ -1,105 +1,110 @@
-{
-  // scroll
-  const scroll = document.querySelector('.levus-scroll');
+// 26-06-2020
 
-  // if exists
-  if(scroll != null){
-    // scroll elements
-    let items = scroll.querySelectorAll('.scroll-item');
-  
-    // дублюємо всі елементи скрола
-    items.forEach(item => {
-      const clone = item.cloneNode(!0);
-      scroll.append(clone);
-    });
-  
-    // new (all) scroll elements
-    items = scroll.querySelectorAll('.scroll-item');
-  
+class LevusScroll {
+  constructor(elements) {
+    // wrapper
+    this.elements = document.querySelector(elements);
+    // elements
+    this.items = this.elements.querySelectorAll('.scroll-item');
+    // to left button 
+    this.left = this.elements.querySelector('.left');
+    // to right button
+    this.right = this.elements.querySelector('.right');
+    // temporary array
+    this.sizes = [];
     // one item size
-    let width = 1;
-  
-    // resize
-    window.addEventListener('resize', move);
-  
-    // sizes
-    const sizes = [];
-  
-    // z-index position
-    let zIndex = 0;
-  
-    // fill sizes
-    items.forEach((item, i) => sizes.push(i * width - width));
-  
-    // build scroll
-    move();
-  
-    // left
-    const left = document.querySelector('.levus-scroll-nav .left');
-  
-    // right
-    const right = document.querySelector('.levus-scroll-nav .right');
-  
-    // scroll to left
-    left.addEventListener('click', () => {
-      const first = sizes.pop();
-      sizes.unshift(first);
-      move();
+    this.width = 1;
+    // z-index
+    this.zIndex = 0;
+  }
+
+  getElements() {
+    // change quantity
+    this.items.forEach(item => {
+      const clone = item.cloneNode(!0);
+      this.elements.append(clone);
     });
-  
-    // scroll to right
-    right.addEventListener('click', () => {
-      const last = sizes.shift();
-      sizes.push(last);
-      move();
+
+    this.items = this.elements.querySelectorAll('.scroll-item');
+    return this.items;
+  }
+
+  toSizes(){
+    this.items.forEach((item, i) => this.sizes.push(i * this.width - this.width));
+  }
+
+  arrows(){
+    this.left.addEventListener('click', () => {
+      const first = this.sizes.pop();
+      this.sizes.unshift(first);
+      this.move();
     });
-  
-    // function move 1 item
-    function move() {
-  
-      if (scroll.offsetWidth < 400) {
-        width = scroll.offsetWidth;
-        items.forEach((item, i) => {
-          item.style.width = `${width}px`;
-  
-          item.style.transform = `translateX(${sizes[i] * width}px)`;
-  
-          if (sizes[i] === 0) zIndex = 3;
-          else if(sizes[i] === -1 || sizes[i] === 1) zIndex = 2;
-          else zIndex = 0;
-  
-          item.style.zIndex = zIndex;
-        });
-      }
-  
-      else if (scroll.offsetWidth < 600) {
-        width = scroll.offsetWidth / 2;
-        items.forEach((item, i) => {
-          item.style.width = `${width}px`;
-  
-          item.style.transform = `translateX(${sizes[i] * width}px)`;
-  
-          if (sizes[i] === 0 || sizes[i] === 1 || sizes[i] === 2) zIndex = 3;
-          else zIndex = 0;
-  
-          item.style.zIndex = zIndex;
-        });
-      }
-  
-      else if (scroll.offsetWidth > 599) {
-        width = scroll.offsetWidth / 3;
-        items.forEach((item, i) => {
-          item.style.width = `${width}px`;
-  
-          item.style.transform = `translateX(${sizes[i] * width}px)`;
-  
-          if (sizes[i] === 1) zIndex = 3;
-          else if (sizes[i] ===  0 || sizes[i] === 2) zIndex = 2;
-          else zIndex = 0;
-  
-          item.style.zIndex = zIndex;
-        });
-      }
+
+    this.right.addEventListener('click', () => {
+      const last = this.sizes.shift();
+      this.sizes.push(last);
+      this.move();
+    });    
+  }
+
+  move(){
+    if (this.elements.offsetWidth < 400) {
+      this.width = this.elements.offsetWidth;
+      this.items.forEach((item, i) => {
+        item.style.width = `${this.width}px`;
+
+        item.style.transform = `translateX(${this.sizes[i] * this.width}px)`;
+
+        if (this.sizes[i] === 0) this.zIndex = 3;
+        else if(this.sizes[i] === -1 || this.sizes[i] === 1) this.zIndex = 2;
+        else this.zIndex = 0;
+
+        item.style.zIndex = this.zIndex;
+      });
+    }
+
+    else if (this.elements.offsetWidth < 600) {
+      this.width = this.elements.offsetWidth / 2;
+      this.items.forEach((item, i) => {
+        item.style.width = `${this.width}px`;
+
+        item.style.transform = `translateX(${this.sizes[i] * this.width}px)`;
+
+        if (this.sizes[i] === 0 || this.sizes[i] === 1 || this.sizes[i] === 2) this.zIndex = 3;
+        else this.zIndex = 0;
+
+        item.style.zIndex = this.zIndex;
+      });
+    }
+
+    else if (this.elements.offsetWidth > 599) {
+      this.width = this.elements.offsetWidth / 3;
+      this.items.forEach((item, i) => {
+        item.style.width = `${this.width}px`;
+
+        item.style.transform = `translateX(${this.sizes[i] * this.width}px)`;
+
+        if (this.sizes[i] === 1) this.zIndex = 3;
+        else if (this.sizes[i] ===  0 || this.sizes[i] === 2) this.zIndex = 2;
+        else this.zIndex = 0;
+
+        item.style.zIndex = this.zIndex;
+      });
     }
   }
+  
+  resize(){
+    window.addEventListener('resize', this.move);
+  }
+
+  init() {
+    this.getElements();
+    this.toSizes();
+    this.arrows();
+    this.resize();
+    this.move();
+  }
+
 }
+
+(new LevusScroll('.levus-scroll-wrapper')).init();
