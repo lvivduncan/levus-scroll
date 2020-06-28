@@ -36,13 +36,13 @@ class LevusScroll {
   }
 
   arrows(){
-    this.left.addEventListener('click', () => {
+    this.right.addEventListener('click', () => {
       const first = this.sizes.pop();
       this.sizes.unshift(first);
       this.move();
     });
 
-    this.right.addEventListener('click', () => {
+    this.left.addEventListener('click', () => {
       const last = this.sizes.shift();
       this.sizes.push(last);
       this.move();
