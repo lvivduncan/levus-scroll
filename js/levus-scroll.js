@@ -1,5 +1,4 @@
-// 26-06-2020
-
+// 27-06-2020
 class LevusScroll {
   constructor(elements) {
     // global wrapper

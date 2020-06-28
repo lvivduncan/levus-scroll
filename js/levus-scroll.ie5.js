@@ -1,4 +1,4 @@
-// 26-06-2020
+// 27-06-2020
 "use strict";
 
 function _instanceof(left, right) { if (right != null && typeof Symbol !== "undefined" && right[Symbol.hasInstance]) { return !!right[Symbol.hasInstance](left); } else { return left instanceof right; } }
@@ -12,13 +12,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var LevusScroll = function () {
   function LevusScroll(elements) {
     _classCallCheck(this, LevusScroll);
+
     this.elements = document.querySelector(elements);
+
     this.wrapper = this.elements.querySelector('.levus-scroll');
+
     this.items = this.elements.querySelectorAll('.scroll-item');
+
     this.left = this.elements.querySelector('.left');
+
     this.right = this.elements.querySelector('.right');
+
     this.sizes = [];
+
     this.width = 1;
+
     this.zIndex = 0;
   }
 
@@ -49,14 +57,14 @@ var LevusScroll = function () {
     value: function arrows() {
       var _this3 = this;
 
-      this.left.addEventListener('click', function () {
+      this.right.addEventListener('click', function () {
         var first = _this3.sizes.pop();
 
         _this3.sizes.unshift(first);
 
         _this3.move();
       });
-      this.right.addEventListener('click', function () {
+      this.left.addEventListener('click', function () {
         var last = _this3.sizes.shift();
 
         _this3.sizes.push(last);
@@ -117,5 +125,7 @@ var LevusScroll = function () {
   return LevusScroll;
 }();
 
+
 new LevusScroll('.levus-scroll-wrapper').init();
+
 new LevusScroll('.levus-scroll-wrapper-2').init();
